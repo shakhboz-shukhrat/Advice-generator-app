@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Frontend Mentor | Advice generator app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  </head>
+  <body>
+    <div class="content">
+      <p class="p1"></p>
+      <p class="p2"></p>
+      <div class="img">
+        <img src="./images/icon-dice.svg" alt="" class="icon" />
+      </div>
+      <img src="./images/pattern-divider-desktop.svg" alt="" class="pat" />
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        fetch("https://api.adviceslip.com/advice")
+          .then((response) => {
+            return response.json();
+          })
+          .then((adviceData) => {
+            const adviceObj = adviceData.slip;
+            console.log(adviceObj.advice);
+            $(".p1").text("ADVICE #" + adviceObj.id);
+            $(".p2").text('"' + adviceObj.advice + '"');
+          });
+        $(".icon").click(function () {
+          fetch("https://api.adviceslip.com/advice")
+            .then((response) => {
+              return response.json();
+            })
+            .then((adviceData) => {
+              const adviceObj = adviceData.slip;
+              console.log(adviceObj.advice);
+              $(".p1").text("ADVICE #" + adviceObj.id);
+              $(".p2").text('"' + adviceObj.advice + '"');
+            });
+        });
+      });
+    </script>
+  </body>
+</html>
